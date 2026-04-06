@@ -1,16 +1,39 @@
-# React + Vite
+# Kinetic Precision
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A futuristic, high-performance physical evolution laboratory. This project is a **Next.js 16.2.2** restoration of the original Stitch design (**Project ID: 7589480028905031553**), featuring 3D athletic aesthetics, biometric trackers, and elite training protocols.
 
-Currently, two official plugins are available:
+## Tech Stack
+- **Framework**: Next.js 16.2 (App Router)
+- **Styling**: Tailwind CSS v3 & Vanilla CSS
+- **Animations**: Framer Motion & CSS Shard Logic
+- **Icons**: Lucide & Material Symbols
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- **3D Athletic UI**: Floating equipment renders and cinematic backgrounds.
+- **Biometric Ticker**: Real-time performance monitoring simulation.
+- **Elite Protocols**: Scalable training modules for Myofibrillar Hypertrophy and Metabolic Evolution.
+- **Apex Tiers**: Professional-grade pricing structures and feature maps.
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+First, install the dependencies:
 
-## Expanding the ESLint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Then, run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the results.
+
+## Restoration Details
+This project was strictly restored to match the original Stitch project's design system, including:
+- Original `lh3.googleusercontent.com` image assets.
+- Specific neon holographic color tokens.
+- Custom "Kinetic Nebula" animation streaks.
+
+© 2024 Kinetic Precision. Engineered for Performance.
