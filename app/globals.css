@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #131313;
+  --on-background: #e5e2e1;
+  --primary: #39FF14;
+  --secondary: #BC13FE;
+  --tertiary: #00F5FF;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-background antialiased selection:bg-primary selection:text-black;
+    font-family: var(--font-manrope), sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-surface-container-high/40 backdrop-blur-xl border border-white/5 rounded-md;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .neon-glow-primary {
+    @apply shadow-[0_0_20px_rgba(57,255,20,0.15)];
+  }
+
+  .neon-glow-secondary {
+    @apply shadow-[0_0_20px_rgba(188,19,254,0.15)];
+  }
+
+  .neon-glow-tertiary {
+    @apply shadow-[0_0_20px_rgba(0,245,255,0.15)];
+  }
+
+  .shimmer {
+    @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Original Stitch Classes */
+  .glass-panel {
+    background: rgba(32, 31, 31, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .perspective-2000 { perspective: 2000px; }
+  .rotate-y-25 { transform: rotateY(25deg); }
+  .rotate-y-n25 { transform: rotateY(-25deg); }
+  .text-glow { text-shadow: 0 0 15px rgba(57, 255, 20, 0.5); }
+  
+  .floating-shard {
+    position: absolute;
+    background: linear-gradient(135deg, rgba(57, 255, 20, 0.1), rgba(0, 245, 255, 0.1));
+    border: 1px solid rgba(57, 255, 20, 0.2);
+    backdrop-filter: blur(4px);
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  }
+
+  .streak-animate {
+    animation: streak-move 8s linear infinite;
+  }
+  @keyframes streak-move {
+    0% { transform: translateX(-100%) skewX(-45deg); }
+    100% { transform: translateX(200%) skewX(-45deg); }
+  }
+
+  .parallax-bg {
+    transform: translateZ(-1px) scale(2);
+    z-index: -1;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-surface-container-lowest;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-surface-container-high rounded-full hover:bg-surface-container-highest transition-colors;
+}
