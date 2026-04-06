@@ -24,9 +24,11 @@ export const Navigation = () => (
         <Link href="/philosophy"><span className="text-neutral-400 hover:text-neutral-100 transition-colors cursor-pointer">Philosophy</span></Link>
         <Link href="/locations"><span className="text-neutral-400 hover:text-neutral-100 transition-colors cursor-pointer">Locations</span></Link>
       </div>
-      <button className="px-8 py-2 bg-gradient-to-r from-[#39FF14] to-[#1fd100] text-black font-headline font-bold uppercase tracking-tighter rounded-md hover:scale-105 hover:shadow-[0_0_15px_rgba(57,255,20,0.4)] transition-all duration-300">
-        Join Now
-      </button>
+      <Link href="/signup">
+        <button className="px-8 py-2 bg-gradient-to-r from-[#39FF14] to-[#1fd100] text-black font-headline font-bold uppercase tracking-tighter rounded-md hover:scale-105 hover:shadow-[0_0_15px_rgba(57,255,20,0.4)] transition-all duration-300">
+          Join Now
+        </button>
+      </Link>
     </div>
   </nav>
 );
