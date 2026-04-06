@@ -1,23 +1,28 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Navigation, BiometricTicker, Footer, SharedStyles } from '../../components/SharedUI';
+import { signUp } from '../actions/auth';
 
-const InputField = ({ label, type = "text", placeholder }) => (
+const InputField = ({ label, name, type = "text", placeholder, required = true }) => (
   <div className="space-y-2">
     <label className="font-headline text-[10px] tracking-[0.3em] uppercase text-neutral-500 block ml-1">{label}</label>
     <input 
+      name={name}
       type={type}
+      required={required}
       placeholder={placeholder}
       className="w-full bg-neutral-900/50 border border-neutral-800 rounded-sm px-6 py-4 font-body text-white placeholder:text-neutral-700 focus:border-[#39FF14] focus:ring-1 focus:ring-[#39FF14]/20 transition-all outline-none"
     />
   </div>
 );
 
-const SelectField = ({ label, options }) => (
+const SelectField = ({ label, name, options }) => (
   <div className="space-y-2">
     <label className="font-headline text-[10px] tracking-[0.3em] uppercase text-neutral-500 block ml-1">{label}</label>
     <select 
+      name={name}
       className="w-full bg-neutral-900/50 border border-neutral-800 rounded-sm px-6 py-4 font-body text-white focus:border-[#39FF14] transition-all outline-none appearance-none"
     >
       {options.map(opt => <option key={opt} value={opt} className="bg-black">{opt}</option>)}
@@ -26,6 +31,25 @@ const SelectField = ({ label, options }) => (
 );
 
 export default function Signup() {
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+
+    const formData = new FormData(e.target);
+    const result = await signUp(formData);
+
+    setLoading(false);
+    if (result?.error) {
+      setStatus({ type: 'error', message: result.error });
+    } else {
+      setStatus({ type: 'success', message: 'Evolution Initialized. Please verify your neural email to proceed.' });
+    }
+  };
+
   return (
     <main className="bg-black min-h-screen text-white font-body overflow-x-hidden">
       <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
@@ -69,31 +93,45 @@ export default function Signup() {
            <div className="relative p-12 bg-neutral-900/40 border border-neutral-800/15 rounded-xl glass-panel shadow-[0_0_50px_rgba(57,255,20,0.05)]">
               <div className="absolute -top-6 -right-6 w-24 h-24 border border-dashed border-[#39FF14]/20 rounded-full animate-spin-slow"></div>
               
-              <div className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                  <div className="grid grid-cols-2 gap-6">
-                    <InputField label="Full_Name" placeholder="VICTOR VANCE" />
-                    <InputField label="Neural_Email" placeholder="VANCE@KINETIC.LAB" type="email" />
+                    <InputField label="Full_Name" name="fullName" placeholder="VICTOR VANCE" />
+                    <InputField label="Neural_Email" name="email" placeholder="VANCE@KINETIC.LAB" type="email" />
                  </div>
                  
+                 <InputField label="Security_Key" name="password" placeholder="********" type="password" />
+
                  <SelectField 
                     label="Primary_Evolution_Goal" 
+                    name="goal"
                     options={["Neural Syncing", "Myofibrillar Hypertrophy", "Metabolic Flux", "Peak Torque Evolution"]} 
                  />
 
                  <SelectField 
                     label="Laboratory_Sector" 
+                    name="sector"
                     options={["Sector_Alpha_Zurich", "Sector_Beta_Tokyo", "Sector_Gamma_NewYork", "Sector_Delta_Dubai"]} 
                  />
 
+                 {status && (
+                    <div className={`p-4 rounded-sm border ${status.type === 'error' ? 'border-red-500/50 bg-red-500/10 text-red-500' : 'border-[#39FF14]/50 bg-[#39FF14]/10 text-[#39FF14]'} font-headline text-xs tracking-widest uppercase`}>
+                       {status.message}
+                    </div>
+                 )}
+
                  <div className="pt-8">
-                    <button className="w-full py-5 bg-[#39FF14] text-black font-headline font-black text-lg uppercase tracking-[0.2em] rounded-sm hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(57,255,20,0.2)]">
-                       Initialize Evolution
+                    <button 
+                       disabled={loading}
+                       type="submit"
+                       className="w-full py-5 bg-[#39FF14] text-black font-headline font-black text-lg uppercase tracking-[0.2em] rounded-sm hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 transition-all shadow-[0_0_30px_rgba(57,255,20,0.2)]"
+                    >
+                       {loading ? 'INITIALIZING...' : 'Initialize Evolution'}
                     </button>
                     <p className="text-center mt-6 font-headline text-[10px] tracking-widest text-neutral-600 uppercase">
                        By clicking, you accept the Kinetic Protocols & Ethics sync.
                     </p>
                  </div>
-              </div>
+              </form>
            </div>
         </div>
       </section>
